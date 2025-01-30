@@ -15,15 +15,9 @@ module.exports = (app) => {
 
     });
 
-    app.get('/users/admin', (re, res) => {
+    app.post('/users', (req, res) => {
 
-
-        res.statusCode = 200;
-        res.setHeader('Content-Tipe', 'application/json');
-        res.json({
-            users: []
-
-        });
+        res.json(req.body);
 
     });
 
