@@ -4,7 +4,6 @@ let db = new NeDB({
     autoload: true
 });
 
-
 module.exports = (app) => {
 
     let route = app.route('/users');
@@ -33,7 +32,6 @@ module.exports = (app) => {
 
         db.insert(req.body, (err, user) => {
 
-
             if (err) {
                 app.utils.error.send(err, req, res);
             } else {
@@ -45,4 +43,19 @@ module.exports = (app) => {
 
     });
 
+    let routeId = app.route('/users/:id');
+
+    routeId.get((req, res) => {
+
+        db.findOne({ _id: req.params.id }).exec((err, user) => {
+
+            if (err) {
+                app.utils.error.send(err, req, res);
+            } else {
+
+                res.status(200).json(user);
+            }
+        });
+
+    });
 };
